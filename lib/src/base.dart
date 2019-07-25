@@ -29,7 +29,7 @@ class FlutterWebviewPlugin {
   final _onStateChanged = StreamController<WebViewStateChanged>.broadcast();
   final _onScrollXChanged = StreamController<double>.broadcast();
   final _onScrollYChanged = StreamController<double>.broadcast();
-  final _onProgressChanged = new StreamController<double>.broadcast();
+  final _onProgressChanged = StreamController<double>.broadcast();
   final _onHttpError = StreamController<WebViewHttpError>.broadcast();
 
   Future<Null> _handleMessages(MethodCall call) async {
@@ -49,7 +49,7 @@ class FlutterWebviewPlugin {
       case 'onScrollYChanged':
         _onScrollYChanged.add(call.arguments['yDirection']);
         break;
-      case "onProgressChanged":
+      case 'onProgressChanged':
         _onProgressChanged.add(call.arguments["progress"]);
         break;
       case 'onState':
@@ -60,7 +60,7 @@ class FlutterWebviewPlugin {
         );
         break;
       case 'onHttpError':
-        _onHttpError.add(WebViewHttpError(call.arguments['code'], call.arguments['url']));
+        _onHttpError.add(WebViewHttpError(call.arguments['code'].toString(), call.arguments['url']));
         break;
     }
   }
